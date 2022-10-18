@@ -1,4 +1,4 @@
-name: Android CI
+name: My Practice CICD
 
 on:
   push:
@@ -8,6 +8,6 @@ jobs:
   my-job:
     runs-on: ubuntu-latest
     steps:
-      name: my-demo
-      run: echo "Hello my first run"
+      - name: my-demo
+        run: echo "Hello my first run"
   
