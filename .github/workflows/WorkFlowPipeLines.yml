@@ -1,0 +1,13 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      name: my-demo
+      run: echo "Hello my first run"
+  
