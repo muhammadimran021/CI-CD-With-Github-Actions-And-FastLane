@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: fastlane beta
+      - run: fastlane distribution
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
   
