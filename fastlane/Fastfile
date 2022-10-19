@@ -44,10 +44,10 @@ platform :android do
 
      # find apk path
      output_path = "./app/build/outputs/apk/debug/app-debug.apk"
-#      output_json_path = output_path + "output-metadata.json"
-#      build_output = load_json(json_path: output_json_path)
-#      elements = build_output["elements"][0]
-#      apk_path = output_path + elements["outputFile"]
+     output_json_path = output_path + "output-metadata.json"
+     build_output = load_json(json_path: output_json_path)
+     elements = build_output["elements"][0]
+     apk_path = output_path + elements["outputFile"]
 
     desc "My awesome app"
     lane :distribute do
@@ -55,7 +55,7 @@ platform :android do
         # build_android_app is a built-in fastlane action.
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
-            apk_path: output_path,
+            apk_path: apk_path,
             testers: "ik33218@gmail.com",
             service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
             release_notes: "Lots of amazing new features to test out!"
