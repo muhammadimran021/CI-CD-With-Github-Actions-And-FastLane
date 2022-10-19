@@ -40,7 +40,6 @@ platform :android do
     end
 
     gradle(task: "clean")
-    build_android_app(task: "assembleDebug")
 
 #     copy_artifacts(
 #         artifacts: [lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]],
@@ -56,7 +55,7 @@ platform :android do
 
     desc "My awesome app"
     lane :distribute do
-        build_android_app
+        build_android_app(task: "assembleDebug")
         # build_android_app is a built-in fastlane action.
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
