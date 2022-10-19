@@ -1,0 +1,164 @@
+{
+  "project_info": {
+    "project_number": "91922724469",
+    "firebase_url": "https://authententicationapp.firebaseio.com",
+    "project_id": "authententicationapp",
+    "storage_bucket": "authententicationapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91922724469:android:97e3d1a6b2387c72892a3c",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZj2Xz8gy34BOaVMgp5l8Z62NPIhfuo0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91922724469:android:5f58157e0944b5c8892a3c",
+        "android_client_info": {
+          "package_name": "com.appabilities.angle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZj2Xz8gy34BOaVMgp5l8Z62NPIhfuo0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91922724469:android:cbe25e0167efa680892a3c",
+        "android_client_info": {
+          "package_name": "com.example.findmydoctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91922724469-a9hj1v3hdllgj7at53k8v2dnm9ptrtnm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.findmydoctor",
+            "certificate_hash": "cb73c462e47afc8d7a3a50c742120b307e978b68"
+          }
+        },
+        {
+          "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZj2Xz8gy34BOaVMgp5l8Z62NPIhfuo0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91922724469:android:eaf687adad7e0dc3",
+        "android_client_info": {
+          "package_name": "com.example.imran.feragments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZj2Xz8gy34BOaVMgp5l8Z62NPIhfuo0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91922724469:android:feb45bb205a9f0f6892a3c",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZj2Xz8gy34BOaVMgp5l8Z62NPIhfuo0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91922724469-ahotk0v7gb321ukdunfmb027a0p9hruk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

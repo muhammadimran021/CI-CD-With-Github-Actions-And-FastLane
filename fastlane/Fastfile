@@ -1,38 +1,66 @@
 # This file contains the fastlane.tools configuration
+
 # You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
+
 #
 
+# For a list of all available actions, check out
+
+#
+
+#     https://docs.fastlane.tools/actions
+
+#
+
+# For a list of all available plugins, check out
+
+#
+
+#     https://docs.fastlane.tools/plugins/available-plugins
+
+#
+
+
+
 # Uncomment the line if you want fastlane to automatically update itself
+
 # update_fastlane
+
+
 
 default_platform(:android)
 
+
+
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
+    before_all do
+    ENV["FIREBASE_LOGIN_CREDENTIALS"] = "fastlane/authententicationapp-5959f9dae913.json"
+    ENV["FIREBASE_APP_ID"] = "1:91922724469:android:feb45bb205a9f0f6892a3c"
+    end
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
-  end
+    gradle(task: "clean")
+    build_android_app(task: "assembleDebug")
+
+     # find apk path
+     output_path = "./app/build/outputs/apk/debug/"
+     output_json_path = output_path + "output-metadata.json"
+     build_output = load_json(json_path: output_json_path)
+     elements = build_output["elements"][0]
+     apk_path = output_path + elements["outputFile"]
+
+    desc "My awesome app"
+    lane :distribute do
+
+        # build_android_app is a built-in fastlane action.
+        firebase_app_distribution(
+            app: ENV["FIREBASE_APP_ID"],
+            apk_path: apk_path,
+            testers: "ik33218@gmail.com",
+            service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+            release_notes: "Lots of amazing new features to test out!"
+        )
+    end
+
 end
+
