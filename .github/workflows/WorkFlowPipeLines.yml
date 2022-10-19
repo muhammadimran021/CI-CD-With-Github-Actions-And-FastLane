@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: fastlane distribution
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+      - name: Setup Fastlane
+          run: bundle install
+
+      - name: Distribute app with 🔥 App Distribution 🚀
+      - run: bundle exec fastlane distribution
+
   
