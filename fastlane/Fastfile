@@ -42,13 +42,13 @@ platform :android do
     gradle(task: "clean")
     build_android_app(task: "assembleDebug")
 
-    copy_artifacts(
-        artifacts: [lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]],
-        target_path: './app/Apk file/'
-      )
+#     copy_artifacts(
+#         artifacts: [lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]],
+#         target_path: './app/Apk file/'
+#       )
 
      # find apk path
-     output_path = "./app/Apk file/"
+#      output_path = "./app/Apk file/"
 #      output_json_path = output_path + "output-metadata.json"
 #      build_output = load_json(json_path: output_json_path)
 #      elements = build_output["elements"][0]
@@ -56,11 +56,10 @@ platform :android do
 
     desc "My awesome app"
     lane :distribute do
-
+        build_android_app
         # build_android_app is a built-in fastlane action.
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
-            apk_path: output_path,
             testers: "ik33218@gmail.com",
             service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
             release_notes: "Lots of amazing new features to test out!"
