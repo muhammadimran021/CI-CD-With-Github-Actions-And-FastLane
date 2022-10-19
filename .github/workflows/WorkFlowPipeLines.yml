@@ -38,6 +38,9 @@ jobs:
       - name: Grant Permission to Execute
         run: chmod +x gradlew
 
+      - name: Update All Bundlers
+        run: bundle update --bundler
+
       - name: Install bundle
         run: |
           bundle config path vendor/bundle
