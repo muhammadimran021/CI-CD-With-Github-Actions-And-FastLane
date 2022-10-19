@@ -1,15 +1,33 @@
-name: My Practice CICD
+name: Distribute
 
 on:
   push:
-    branches: [ "master" ]
-
+    branches: [ test ]
 
 jobs:
-  my-job:
+  distribute:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2p20'
+
+      - name: Cache Ruby - Bundler
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Cache Gradle
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches/
+          key: cache-clean-gradle-${{ matrix.os }}-${{ matrix.jdk }}
 
       - name: Cache Gradle Wrapper
         uses: actions/cache@v1
@@ -20,10 +38,11 @@ jobs:
       - name: Grant Permission to Execute
         run: chmod +x gradlew
 
-      - name: bundle install
+      - name: Install bundle
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+
       - name: Create Firebase Service Credentials file
         run: |
           echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
@@ -32,8 +51,84 @@ jobs:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        run: bundle exec fastlane distribution
+        run: bundle exec fastlane distribute
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#name: My Practice CICD
+#
+#on:
+#  push:
+#    branches: [ "master" ]
+#
+#
+#jobs:
+#  my-job:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Cache Gradle Wrapper
+#        uses: actions/cache@v1
+#        with:
+#          path: ~/.gradle/wrapper/
+#          key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
+#
+#      - name: Grant Permission to Execute
+#        run: chmod +x gradlew
+#
+#      - name: bundle install
+#        run: |
+#          bundle config path vendor/bundle
+#          bundle install --jobs 4 --retry 3
+#      - name: Create Firebase Service Credentials file
+#        run: |
+#          echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
+#          base64 -d -i firebase_credentials.json.b64 > firebase_credentials.json
+#        env:
+#          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+#
+#      - name: Distribute app with 🔥 App Distribution 🚀
+#        run: bundle exec fastlane distribution
+#        env:
+#          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+#
+#
