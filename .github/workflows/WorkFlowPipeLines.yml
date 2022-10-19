@@ -38,6 +38,8 @@ jobs:
       - name: Grant Permission to Execute
         run: chmod +x gradlew
 
+      - name: Add Plugin
+        run: fastlane add_plugin firebase_app_distribution
 
       - name: Install bundle
         run: |
