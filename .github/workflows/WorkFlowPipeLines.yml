@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Fastlane
-          run: bundle install
+        run: bundle install
 
       - name: Distribute app with 🔥 App Distribution 🚀
       - run: bundle exec fastlane distribution
