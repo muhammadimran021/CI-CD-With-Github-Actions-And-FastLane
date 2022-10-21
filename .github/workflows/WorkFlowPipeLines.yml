@@ -59,8 +59,13 @@ jobs:
 
       - name: Distribute app with 🔥 App Distribution 🚀
         run: bundle exec fastlane distribute
-#         env:
-#           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+
+  build-debug-apk:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_comment.message,'-print msg-')"
+
+    echo: "hello world"
+
 
 
 
