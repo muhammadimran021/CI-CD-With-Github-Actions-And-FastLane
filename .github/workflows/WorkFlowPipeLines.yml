@@ -56,17 +56,20 @@ jobs:
       #         env:
       #           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
-      - name: Distribute app with 🔥 App Distribution 🚀
-        if: "contains(github.event.head_commit.message, '[create apk for firebase]')"
-        run: bundle exec fastlane distribute
+      if: "contains(github.event.head_commit.message, '[create apk for firebase]')"
+        - name: Distribute app with 🔥 App Distribution 🚀
+          run: bundle exec fastlane distribute
+      if: "contains(github.event.head_commit.message,'-print msg-')"
+        - name: Distribute debug app with 🔥 App Distribution 🚀
+          run: bundle exec fastlane distribute
 
-  build-debug-apk:
-    runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message,'-print msg-')"
-
-    steps:
-      - name: print-msg
-        run: echo "hello world"
+#  build-debug-apk:
+#    runs-on: ubuntu-latest
+#    if: "contains(github.event.head_commit.message,'-print msg-')"
+#
+#    steps:
+#      - name: print-msg
+#        run: echo "hello world"
 
 
 
