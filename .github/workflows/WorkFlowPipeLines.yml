@@ -7,7 +7,6 @@ on:
 jobs:
   distribute-on-firebase:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '[create apk for firebase]')"
 
     steps:
       - uses: actions/checkout@v2
@@ -58,9 +57,11 @@ jobs:
       #           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
       - name: Distribute app with 🔥 App Distribution 🚀
+        if: "contains(github.event.head_commit.message, '[create apk for firebase]')"
         run: bundle exec fastlane distribute
 
   build-debug-apk:
+    runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message,'-print msg-')"
 
     steps:
