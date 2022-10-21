@@ -7,6 +7,7 @@ on:
 jobs:
   distribute:
     runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, '[create apk for firebase]')"
 
     steps:
       - uses: actions/checkout@v2
