@@ -64,7 +64,8 @@ jobs:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_comment.message,'-print msg-')"
 
-    echo: "hello world"
+    steps:
+      echo: "hello world"
 
 
 
