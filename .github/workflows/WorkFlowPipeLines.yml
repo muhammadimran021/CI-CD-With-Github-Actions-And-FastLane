@@ -65,7 +65,8 @@ jobs:
     if: "contains(github.event.head_comment.message,'-print msg-')"
 
     steps:
-      echo: "hello world"
+      -name: print-msg
+       run: echo "hello world"
 
 
 
