@@ -84,7 +84,7 @@ jobs:
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-          if: ${{needs.job1.env.BRANCH_NAME  == 'master'}}
+        if: ${{needs.job1.env.BRANCH_NAME  == 'master'}}
         run: bundle exec fastlane staging
 
 
