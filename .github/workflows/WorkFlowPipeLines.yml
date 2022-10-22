@@ -73,12 +73,12 @@ jobs:
           bundle install --jobs 4 --retry 3
 
       if: "${{needs.job1.env.BRANCH_NAME}} == 'master-release'"
-        - name: Distribute app with 🔥 App Distribution 🚀
-          run: bundle exec fastlane release
+      - name: Distribute app with 🔥 App Distribution 🚀
+      run: bundle exec fastlane release
 
       if: "${{needs.job1.env.BRANCH_NAME}} == 'master'"
-        - name: Create Debug apk file
-          run: bundle exec fastlane staging
+      - name: Create Debug apk file
+      run: bundle exec fastlane staging
 
 
 
