@@ -12,7 +12,7 @@ jobs:
 
       - name: Get Branch Name
         if: github.event_name == 'push'
-        shel: bash
+        shell: bash
         env:
           BRANCH_NAME: ${GITHUB_REF#refs/heads/}
         run: echo $BRANCH_NAME
