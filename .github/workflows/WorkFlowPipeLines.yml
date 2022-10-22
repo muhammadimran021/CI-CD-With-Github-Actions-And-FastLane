@@ -82,7 +82,7 @@ jobs:
         run: echo "the branch name is $BRANCH_NAME1"
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: BRANCH_NAME1  == 'master-release'}
+        if: BRANCH_NAME1  == 'master-release'
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
