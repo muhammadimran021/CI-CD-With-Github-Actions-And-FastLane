@@ -14,14 +14,14 @@ jobs:
         if: github.event_name == 'push'
         shell: bash
         env:
-          BRANCH_NAME: ${GITHUB_REF#*/}
-        run: echo $BRANCH_NAME
+          BRANCH_NAME: ${GITHUB_REF##*/}
+        run: echo "the branch name is ${BRANCH_NAME}"
 
       - name: Get Branch Name if Pull Request
         if: github.event_name == 'pull_request'
         env:
           BRANCH_NAME: ${GITHUB_HEAD_REF}
-        run: echo "$BRANCH_NAME"
+        run: echo "the branch name is ${BRANCH_NAME}"
 
 
   job2:
