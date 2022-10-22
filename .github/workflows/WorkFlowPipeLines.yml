@@ -74,12 +74,14 @@ jobs:
       env:
         BRANCH_NAME: ${{needs.job1.env.BRANCH_NAME}}
       run: echo "the branch name is ${BRANCH_NAME}"
-      if: BRANCH_NAME == 'master-release'
+
+
       - name: Distribute app with 🔥 App Distribution 🚀
+      if: BRANCH_NAME == 'master-release'
       run: bundle exec fastlane release
 
-      if: BRANCH_NAME == 'master'
       - name: Create Debug apk file
+      if: BRANCH_NAME == 'master'
       run: bundle exec fastlane staging
 
 
