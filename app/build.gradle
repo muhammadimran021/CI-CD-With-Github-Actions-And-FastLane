@@ -19,7 +19,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("G:\\PracticeApplication\\MyApplication\\SigningConfigs\\relese.jks")
+            storeFile file("SigningConfigs\\relese.jks")
             storePassword '123456'
             keyAlias 'key0'
             keyPassword '123456'
@@ -34,12 +34,10 @@ android {
         }
 
         debug {
-            applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
         }
 
         staging {
-            applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
         }
     }
