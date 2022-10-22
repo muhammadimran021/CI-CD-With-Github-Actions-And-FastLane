@@ -20,7 +20,7 @@ jobs:
       - name: Get Branch Name if Pull Request
         if: github.event_name == 'pull_request'
         env:
-          BRANCH_NAME: echo ${GITHUB_HEAD_REF}
+          BRANCH_NAME: ${{ github.head_ref }}
         run: echo "the branch name is ${BRANCH_NAME}"
 
 
@@ -73,11 +73,11 @@ jobs:
           bundle install --jobs 4 --retry 3
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: ${{needs.job1.env.BRANCH_NAME}} == 'master-release'
+        if: "${{needs.job1.env.BRANCH_NAME}} == 'master-release'"
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-        if: ${{needs.job1.env.BRANCH_NAME}} == 'master'
+        if: "${{needs.job1.env.BRANCH_NAME}} == 'master'"
         run: bundle exec fastlane staging
 
 
