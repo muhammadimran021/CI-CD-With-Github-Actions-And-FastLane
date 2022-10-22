@@ -7,6 +7,7 @@ jobs:
     name: Track Push or Pull
     runs-on: ubuntu-latest
 
+    #set output variable for sharing with other job
     outputs:
       push: ${{ steps.push.outputs.BRANCH_NAME }}
       pull: ${{ steps.pull.outputs.BRANCH_NAME }}
@@ -81,8 +82,8 @@ jobs:
       - name: Branch Name
         shell: bash
         env:
-          BRANCH_NAME1: ${{needs.job1.env.BRANCH_NAME}}
-        run: echo "the branch name is ${{needs.job1.env.BRANCH_NAME}}"
+          BRANCH_NAME1: ${{needs.job1.outputs.push}}
+        run: echo "the branch name is $BRANCH_NAME1"
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
