@@ -55,9 +55,8 @@ platform :android do
 
     desc "My awesome app"
     lane :release do
-        gradle(task: "assemble",
+        build_android_app(task: "assemble",
                           flavor: "release",
-                          build_type: "release",
                           properties: {
                                   "android.injected.signing.store.file" => ENV['KEYSTORE_PATH'],
                                   "android.injected.signing.store.password" => ENV['STORE_PASSWORD'],
@@ -72,11 +71,12 @@ platform :android do
             service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
             release_notes: "this is release build"
         )
+    end
 
     lane :staging do
-          gradle(task: "assemble",
+          build_android_app(task: "assemble",
                  flavor: "staging",
-                 build_type: "debug")
+                 build_type: "Debug")
           # build_android_app is a built-in fastlane action.
           firebase_app_distribution(
              app: ENV["FIREBASE_APP_ID"],
