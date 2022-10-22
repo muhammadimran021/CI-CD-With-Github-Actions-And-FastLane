@@ -80,11 +80,11 @@ jobs:
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: "BRANCH_NAME1 == 'master-release'"
+        if: ${{needs.job1.env.BRANCH_NAME  == 'master-release'}}
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-        if: "BRANCH_NAME1 == 'master'"
+          if: ${{needs.job1.env.BRANCH_NAME  == 'master'}}
         run: bundle exec fastlane staging
 
 
