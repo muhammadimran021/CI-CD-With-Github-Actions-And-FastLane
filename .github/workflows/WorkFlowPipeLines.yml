@@ -18,7 +18,7 @@ jobs:
         run: echo $BRANCH_NAME
 
       - name: Get Branch Name if Pull Request
-        if: gihub.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         env:
           BRANCH_NAME: ${GITHUB_HEAD_REF}
         run: echo $BRANCH_NAME
