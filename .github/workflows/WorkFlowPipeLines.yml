@@ -7,6 +7,10 @@ jobs:
     name: Track Push or Pull
     runs-on: ubuntu-latest
 
+    outputs:
+      push: ${{ steps.push.outputs.BRANCH_NAME }}
+      pull: ${{ steps.pull.outputs.BRANCH_NAME }}
+
     steps:
       - uses: actions/checkout@v2
 
@@ -15,12 +19,14 @@ jobs:
         shell: bash
         env:
           BRANCH_NAME: ${{ github.ref_name }}
+        id: push
         run: echo "the branch name is ${BRANCH_NAME}"
 
       - name: Get Branch Name if Pull Request
         if: github.event_name == 'pull_request'
         env:
           BRANCH_NAME: ${{ github.head_ref }}
+        id: pull
         run: echo "the branch name is ${BRANCH_NAME}"
 
 
@@ -75,16 +81,16 @@ jobs:
       - name: Branch Name
         shell: bash
         env:
-          BRANCH_NAME1: ${{job1.env.BRANCH_NAME}}
-        run: echo "the branch name is $BRANCH_NAME1}"
+          BRANCH_NAME1: ${{needs.job1.env.BRANCH_NAME}}
+        run: echo "the branch name is ${{needs.job1.env.BRANCH_NAME}}"
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: ${{job1.env.BRANCH_NAME  == 'master-release'}}
+        if: ${{needs.job1.outputs.push  == 'master-release'}}
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-        if: ${{job1.env.BRANCH_NAME  == 'master'}}
+        if: ${{needs.job1.outputs.push  == 'master'}}
         run: bundle exec fastlane staging
 
 
