@@ -76,7 +76,7 @@ jobs:
         shell: bash
         env:
           BRANCH_NAME1: ${{job1.env.BRANCH_NAME}}
-        run: echo "the branch name is ${{needs.job1.env.BRANCH_NAME}}"
+        run: echo "the branch name is $BRANCH_NAME1}"
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
