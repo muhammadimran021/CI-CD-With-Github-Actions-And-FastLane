@@ -74,11 +74,11 @@ jobs:
 
       - name: Distribute app with 🔥 App Distribution 🚀
         if: ${{needs.job1.env.BRANCH_NAME}} == 'master'
-        run: bundle exec fastlane distribute
+        run: bundle exec fastlane release
 
       - name: Create Debug apk file
         if: ${{needs.job1.env.BRANCH_NAME}} == 'staging'
-        run: bundle exec fastlane distribute
+        run: bundle exec fastlane staging
 
 
 
