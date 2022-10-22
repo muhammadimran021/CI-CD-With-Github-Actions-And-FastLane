@@ -14,7 +14,7 @@ jobs:
         if: github.event_name == 'push'
         shell: bash
         env:
-          BRANCH_NAME: $(echo ${GITHUB_REF##*/})
+          BRANCH_NAME: ${{ github.ref_name }}
         run: echo "the branch name is ${BRANCH_NAME}"
 
       - name: Get Branch Name if Pull Request
