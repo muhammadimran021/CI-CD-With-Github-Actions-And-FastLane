@@ -71,18 +71,20 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      env:
-        BRANCH_NAME: ${{needs.job1.env.BRANCH_NAME}}
-      run: echo "the branch name is ${BRANCH_NAME}"
+
+      - name: Branch Name
+        env:
+          BRANCH_NAME: ${{needs.job1.env.BRANCH_NAME}}
+        run: echo "the branch name is ${BRANCH_NAME}"
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
-      if: BRANCH_NAME == 'master-release'
-      run: bundle exec fastlane release
+        if: BRANCH_NAME == 'master-release'
+        run: bundle exec fastlane release
 
       - name: Create Debug apk file
-      if: BRANCH_NAME == 'master'
-      run: bundle exec fastlane staging
+        if: BRANCH_NAME == 'master'
+        run: bundle exec fastlane staging
 
 
 
