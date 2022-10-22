@@ -54,8 +54,10 @@ platform :android do
 #      apk_path = output_path + elements["outputFile"]
 
     desc "My awesome app"
-    lane :distribute do
-        build_android_app(task: "assembleDebug")
+    lane :debug do
+        build_android_app(task: "assemble",
+                          flavor: "staging",
+                          build_type: "Release")
         # build_android_app is a built-in fastlane action.
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
@@ -63,6 +65,18 @@ platform :android do
             service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
             release_notes: "Lots of amazing new features to test out!"
         )
+
+    lane :staging do
+          build_android_app(task: "assemble",
+                            flavor: "staging",
+                            build_type: "Release")
+          # build_android_app is a built-in fastlane action.
+          firebase_app_distribution(
+             app: ENV["FIREBASE_APP_ID"],
+             testers: "ik33218@gmail.com",
+             service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+             release_notes: "Lots of amazing new features to test out!"
+          )
     end
 
 end
