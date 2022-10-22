@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
 
 
-    if: "contains(github.event.head_commit.message, '[create apk for firebase]')"
+    if: "contains(github.event.head_commit.message, '[build apk for firebase]')"
     steps:
       - uses: actions/checkout@v2
 
@@ -83,11 +83,11 @@ jobs:
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: ${{needs.job1.outputs.push  == 'master-release'}}
+        if: $BRANCH_NAME1  == 'master-release'}
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-        if: ${{needs.job1.outputs.push  == 'master'}}
+        if: $BRANCH_NAME1  == 'master'
         run: bundle exec fastlane staging
 
 
