@@ -15,11 +15,13 @@ jobs:
         shel: bash
         env:
           BRANCH_NAME: ${GITHUB_REF#refs/heads/}
+        run: echo $BRANCH_NAME
 
       - name: Get Branch Name if Pull Request
         if: gihub.event_name == 'pull_request'
         env:
           BRANCH_NAME: ${GITHUB_HEAD_REF}
+        run: echo $BRANCH_NAME
 
 
   job2:
