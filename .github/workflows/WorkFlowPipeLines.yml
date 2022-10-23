@@ -83,11 +83,19 @@ jobs:
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: ${{env.BRANCH_NAME1  == 'master-release'}}
+        if: ${{needs.job1.outputs.push  == 'master-release'}}
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{secrets.KEYSTORE_FILE}}
+          alias: ${{secrets.KEY_ALIAS}}
+          keyStorePassword: ${{secrets.STORE_PASSWORD}}
+          keyPassword: ${{secrets.KEY_PASSWORD}}
+
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-        if: ${{env.BRANCH_NAME1  == 'master'}}
+        if: ${{needs.job1.outputs.push  == 'master'}}
         run: bundle exec fastlane staging
 
 
