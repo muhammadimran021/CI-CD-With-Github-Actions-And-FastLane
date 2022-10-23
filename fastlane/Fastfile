@@ -39,7 +39,6 @@ platform :android do
     ENV["FIREBASE_APP_ID"] = "1:91922724469:android:feb45bb205a9f0f6892a3c"
     end
 
-    gradle(task: "clean")
 
 #     copy_artifacts(
 #         artifacts: [lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]],
@@ -55,13 +54,10 @@ platform :android do
 
     desc "My awesome app"
     lane :release do
-        build_android_app(task: "assemble",
-                          flavor: "release"
-              )
         # build_android_app is a built-in fastlane action.
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
-            apk_path: "app/build/outputs/bundle/release/"
+            apk_path: "app/release/app-release-signed.apk"
             testers: "ik33218@gmail.com",
             service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
             release_notes: "this is release build"
@@ -69,8 +65,8 @@ platform :android do
     end
 
     lane :staging do
-          build_android_app(task: "assemble",
-                 flavor: "staging")
+          gradle(task: "clean")
+          build_android_app(task: "assemble",flavor: "staging")
           # build_android_app is a built-in fastlane action.
           firebase_app_distribution(
              app: ENV["FIREBASE_APP_ID"],
