@@ -82,13 +82,16 @@ jobs:
         run: echo "the branch name is $BRANCH_NAME1"
 
 
+      - name: Build
+        if: ${{needs.job1.outputs.push  == 'master'}}
+        run: ./gradlew build
+      - name: Assemble Release Bundle
+        if: ${{needs.job1.outputs.push  == 'master'}}
+        run: |
+          ./gradlew assembleRelease
+
       - name: Distribute app with 🔥 App Distribution 🚀
         if: ${{needs.job1.outputs.push  == 'master'}}
-        - name: Build
-          run: ./gradlew build
-        - name: Assemble Release Bundle
-          run: |
-            ./gradlew assembleRelease
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/bundle/release
