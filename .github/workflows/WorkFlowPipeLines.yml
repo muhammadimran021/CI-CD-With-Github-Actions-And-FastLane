@@ -83,7 +83,7 @@ jobs:
 
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: ${{needs.job1.outputs.push  == 'master-release'}}
+        if: ${{needs.job1.outputs.push  == 'master'}}
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/bundle/release
@@ -93,11 +93,11 @@ jobs:
           keyPassword: ${{secrets.KEY_PASSWORD}}
 
       - name: Run fastlane command for release
-        if: ${{needs.job1.outputs.push  == 'master-release'}}
+        if: ${{needs.job1.outputs.push  == 'master'}}
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-        if: ${{needs.job1.outputs.push  == 'master'}}
+        if: ${{needs.job1.outputs.push  == 'master-1'}}
         run: bundle exec fastlane staging
 
 
