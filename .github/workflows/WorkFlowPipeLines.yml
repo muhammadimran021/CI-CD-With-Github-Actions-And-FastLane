@@ -62,7 +62,7 @@ jobs:
     needs: setupGradleBuild
     runs-on: ubuntu-latest
 
-#    if: ${{needs.job1.outputs.push == 'master'}}
+    if: ${{needs.getBranchName.outputs.push == 'master'}}
     steps:
       - uses: actions/checkout@v2
 
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
 
 
-    if: "${{needs.job1.outputs.push == 'staging'}}"
+    if: ${{needs.getBranchName.outputs.push == 'staging'}}
     steps:
       - uses: actions/checkout@v2
 
