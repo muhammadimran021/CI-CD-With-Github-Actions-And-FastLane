@@ -28,6 +28,10 @@ jobs:
 
 
   job2:
+    name: Generate Branch base Build
+    needs: job1
+    runs-on: ubuntu-latest
+
     setupGradleBuild:
       name: Run Build Process According To Branch
       needs: job1
