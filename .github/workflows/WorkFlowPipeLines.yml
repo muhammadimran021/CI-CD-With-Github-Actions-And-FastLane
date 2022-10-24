@@ -108,8 +108,6 @@ jobs:
     needs: setupGradleBuild
     runs-on: ubuntu-latest
 
-    -name: check branch name
-     run: echo "${{needs.job1.outputs.push}}"
 
     if: "${{needs.job1.outputs.push == 'staging'}}"
     steps:
