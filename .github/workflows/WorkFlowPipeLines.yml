@@ -85,7 +85,7 @@ jobs:
 
 
       - name: Build
-        if: $IS_MASTER
+        if: ${IS_MASTER}
         run: ./gradlew build
       - name: Assemble Release Bundle
         if: env.IS_MASTER
@@ -93,7 +93,7 @@ jobs:
           ./gradlew assembleRelease
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: $IS_MASTER
+        if:  ${IS_MASTER}
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/release
@@ -103,11 +103,11 @@ jobs:
           keyPassword: ${{secrets.KEY_PASSWORD}}
 
       - name: Run fastlane command for release
-        if: $IS_MASTER
+        if:  ${IS_MASTER}
         run: bundle exec fastlane release
 
       - name: Create Debug apk file
-        if: $IS_STAGING
+        if:  ${IS_STAGING}
         run: bundle exec fastlane staging
 
 
