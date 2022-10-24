@@ -85,10 +85,10 @@ jobs:
 
 
       - name: Build
-        if: ${{env.IS_MASTER}}
+        if: ${env.IS_MASTER}
         run: ./gradlew build
       - name: Assemble Release Bundle
-        if: ${{env.IS_MASTER}}
+        if: ${env.IS_MASTER}
         run: |
           ./gradlew assembleRelease
 
