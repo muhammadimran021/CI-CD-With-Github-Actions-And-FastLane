@@ -28,9 +28,7 @@ jobs:
 
       - name: Branch Name
         shell: bash
-        env:
-          BRANCH_NAME1: ${{needs.job1.outputs.push}}
-        run: echo "the branch name is $BRANCH_NAME1 "
+        run: echo "the branch name is $BRANCH_NAME "
 
 
   setupGradleBuild:
