@@ -28,7 +28,7 @@ jobs:
 
       - name: Branch Name
         shell: bash
-        run: echo "the branch name is $BRANCH_NAME "
+        run: echo "the branch name is ${{ github.ref_name }} "
 
 
   setupGradleBuild:
