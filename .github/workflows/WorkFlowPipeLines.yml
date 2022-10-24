@@ -28,7 +28,7 @@ jobs:
 
 
   setupGradleBuild:
-    name: Start Job 2
+    name: setupGradleBuild
     needs: job1
     runs-on: ubuntu-latest
 
@@ -74,48 +74,48 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
-#  BuildReleaseApk:
-#    name: Build For Release
-#    needs: setupGradleBuild
-#    runs-on: ubuntu-latest
-#
-#    if: ${{needs.job1.outputs.push == 'master'}}
-#    steps:
-#      - uses: actions/checkout@v2
-#
-#      - name: Generate Build According to Branch
-#        needs: setupGradleBuild
-#        runs-on: ubuntu-latest
-#
-#      - name: Branch Name
-#        shell: bash
-#        env:
-#          BRANCH_NAME1: ${{needs.job1.outputs.push}}
-#        run: echo "the branch name is $BRANCH_NAME1 "
-#
-#
-#      - name: Build
-#        if: ${{env.IS_MASTER}}
-#        run: ./gradlew build
-#      - name: Assemble Release Bundle
-#        if: env.IS_MASTER == 'true'
-#        run: |
-#          ./gradlew assembleRelease
-#
-#      - name: Distribute app with 🔥 App Distribution 🚀
-#        if: env.IS_MASTER == 'true'
-#        uses: r0adkll/sign-android-release@v1
-#        with:
-#          releaseDirectory: app/release
-#          signingKeyBase64: ${{secrets.KEYSTORE_FILE}}
-#          alias: ${{secrets.KEY_ALIAS}}
-#          keyStorePassword: ${{secrets.STORE_PASSWORD}}
-#          keyPassword: ${{secrets.KEY_PASSWORD}}
-#
-#      - name: Run fastlane command for release
-#        if: env.IS_MASTER == 'true'
-#        run: bundle exec fastlane release
-#
+  BuildReleaseApk:
+    name: Build For Release
+    needs: setupGradleBuild
+    runs-on: ubuntu-latest
+
+    if: ${{needs.job1.outputs.push == 'master'}}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate Build According to Branch
+        needs: setupGradleBuild
+        runs-on: ubuntu-latest
+
+      - name: Branch Name
+        shell: bash
+        env:
+          BRANCH_NAME1: ${{needs.job1.outputs.push}}
+        run: echo "the branch name is $BRANCH_NAME1 "
+
+
+      - name: Build
+        if: ${{env.IS_MASTER}}
+        run: ./gradlew build
+      - name: Assemble Release Bundle
+        if: env.IS_MASTER == 'true'
+        run: |
+          ./gradlew assembleRelease
+
+      - name: Distribute app with 🔥 App Distribution 🚀
+        if: env.IS_MASTER == 'true'
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/release
+          signingKeyBase64: ${{secrets.KEYSTORE_FILE}}
+          alias: ${{secrets.KEY_ALIAS}}
+          keyStorePassword: ${{secrets.STORE_PASSWORD}}
+          keyPassword: ${{secrets.KEY_PASSWORD}}
+
+      - name: Run fastlane command for release
+        if: env.IS_MASTER == 'true'
+        run: bundle exec fastlane release
+
 #  BuildDebugApk:
 #    name: Build For Staging
 #    needs: setupGradleBuild
