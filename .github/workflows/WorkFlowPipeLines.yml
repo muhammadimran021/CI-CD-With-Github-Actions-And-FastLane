@@ -85,7 +85,7 @@ jobs:
 
 
       - name: Build
-        if: IS_MASTER == true
+        if: IS_MASTER == 'true'
         run: ./gradlew build
       - name: Assemble Release Bundle
         if: env.IS_MASTER == 'true'
