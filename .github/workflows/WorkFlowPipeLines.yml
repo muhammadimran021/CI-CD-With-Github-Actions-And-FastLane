@@ -77,7 +77,7 @@ jobs:
     needs: setupGradleBuild
     runs-on: ubuntu-latest
 
-    if: "${{needs.job1.outputs.push == 'master'}}"
+#    if: ${{needs.job1.outputs.push == 'master'}}
     steps:
       - uses: actions/checkout@v2
 
