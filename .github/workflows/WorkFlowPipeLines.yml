@@ -78,6 +78,8 @@ jobs:
 
     BuildApk:
       steps:
+        - uses: actions/checkout@v2
+
         - name: Generate Build According to Branch
           needs: setupGradleBuild
           runs-on: ubuntu-latest
