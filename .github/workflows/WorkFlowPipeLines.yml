@@ -32,8 +32,8 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
+#    steps:
+#      - uses: actions/checkout@v2
 
       setupGradleBuild:
         name: Run Build Process According To Branch
