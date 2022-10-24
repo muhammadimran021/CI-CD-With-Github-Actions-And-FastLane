@@ -35,10 +35,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-#      setupGradleBuild:
-#        name: Run Build Process According To Branch
-#        needs: job1
-#        runs-on: ubuntu-latest
+      setupGradleBuild:
+        name: Run Build Process According To Branch
+        needs: job1
+        runs-on: ubuntu-latest
 #
 #
 #        if: "contains(github.event.head_commit.message, '[build apk for firebase]')"
