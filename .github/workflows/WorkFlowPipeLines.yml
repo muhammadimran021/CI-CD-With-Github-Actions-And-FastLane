@@ -28,10 +28,6 @@ jobs:
 
 
   job2:
-    name: Generate Branch base Build
-    needs: job1
-    runs-on: ubuntu-latest
-
     setupGradleBuild:
       name: Run Build Process According To Branch
       needs: job1
@@ -85,7 +81,6 @@ jobs:
       needs: job1
       runs-on: ubuntu-latest
       if: ${{needs.job1.outputs.push == 'master'}}
-
       steps:
         - uses: actions/checkout@v2
 
@@ -123,7 +118,7 @@ jobs:
           run: bundle exec fastlane release
 
     BuildDebugApk:
-      name: Build For Release
+      name: Build For Staging
       needs: job1
       runs-on: ubuntu-latest
 
