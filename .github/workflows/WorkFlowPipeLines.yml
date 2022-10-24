@@ -35,107 +35,107 @@ jobs:
 #    steps:
 #      - uses: actions/checkout@v2
 
-      setupGradleBuild:
-        name: Run Build Process According To Branch
-        needs: job1
-        runs-on: ubuntu-latest
+    setupGradleBuild:
+      name: Run Build Process According To Branch
+      needs: job1
+      runs-on: ubuntu-latest
 
 
-        if: "contains(github.event.head_commit.message, '[build apk for firebase]')"
-        steps:
-          - uses: actions/checkout@v2
+      if: "contains(github.event.head_commit.message, '[build apk for firebase]')"
+      steps:
+        - uses: actions/checkout@v2
 
-          - uses: actions/setup-ruby@v1
-            with:
-              ruby-version: '2.6'
+        - uses: actions/setup-ruby@v1
+          with:
+            ruby-version: '2.6'
 
-          - name: Cache Ruby - Bundler
-            uses: actions/cache@v2
-            with:
-              path: vendor/bundle
-              key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-              restore-keys: |
-                ${{ runner.os }}-gems-
+        - name: Cache Ruby - Bundler
+          uses: actions/cache@v2
+          with:
+            path: vendor/bundle
+            key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-gems-
 
-          - name: Cache Gradle
-            uses: actions/cache@v1
-            with:
-              path: ~/.gradle/caches/
-              key: cache-clean-gradle-${{ matrix.os }}-${{ matrix.jdk }}
+        - name: Cache Gradle
+          uses: actions/cache@v1
+          with:
+            path: ~/.gradle/caches/
+            key: cache-clean-gradle-${{ matrix.os }}-${{ matrix.jdk }}
 
-          - name: Cache Gradle Wrapper
-            uses: actions/cache@v1
-            with:
-              path: ~/.gradle/wrapper/
-              key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
+        - name: Cache Gradle Wrapper
+          uses: actions/cache@v1
+          with:
+            path: ~/.gradle/wrapper/
+            key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
 
-          - name: Grant Permission to Execute
-            run: chmod +x gradlew
+        - name: Grant Permission to Execute
+          run: chmod +x gradlew
 
-          #       - name: Add firebase Plugin
-          #         run: fastlane add_plugin firebase_app_distribution
+        #       - name: Add firebase Plugin
+        #         run: fastlane add_plugin firebase_app_distribution
 
-          #       - name: Add firebase Plugin
-          #         run: fastlane add_plugin load_json
+        #       - name: Add firebase Plugin
+        #         run: fastlane add_plugin load_json
 
-          - name: Install bundle
-            run: |
-              bundle config path vendor/bundle
-              bundle install --jobs 4 --retry 3
+        - name: Install bundle
+          run: |
+            bundle config path vendor/bundle
+            bundle install --jobs 4 --retry 3
 
-      BuildReleaseApk:
-        name: Build For Release
-        needs: job1
-        runs-on: ubuntu-latest
-        if: ${{needs.job1.outputs.push == 'master'}}
-        steps:
-          - uses: actions/checkout@v2
+    BuildReleaseApk:
+      name: Build For Release
+      needs: job1
+      runs-on: ubuntu-latest
+      if: ${{needs.job1.outputs.push == 'master'}}
+      steps:
+        - uses: actions/checkout@v2
 
-          - name: Generate Build According to Branch
-            needs: setupGradleBuild
-            runs-on: ubuntu-latest
+        - name: Generate Build According to Branch
+          needs: setupGradleBuild
+          runs-on: ubuntu-latest
 
-          - name: Branch Name
-            shell: bash
-            env:
-              BRANCH_NAME1: ${{needs.job1.outputs.push}}
-            run: echo "the branch name is $BRANCH_NAME1 "
+        - name: Branch Name
+          shell: bash
+          env:
+            BRANCH_NAME1: ${{needs.job1.outputs.push}}
+          run: echo "the branch name is $BRANCH_NAME1 "
 
 
-          - name: Build
-            if: ${{env.IS_MASTER}}
-            run: ./gradlew build
-          - name: Assemble Release Bundle
-            if: env.IS_MASTER == 'true'
-            run: |
-              ./gradlew assembleRelease
+        - name: Build
+          if: ${{env.IS_MASTER}}
+          run: ./gradlew build
+        - name: Assemble Release Bundle
+          if: env.IS_MASTER == 'true'
+          run: |
+            ./gradlew assembleRelease
 
-          - name: Distribute app with 🔥 App Distribution 🚀
-            if: env.IS_MASTER == 'true'
-            uses: r0adkll/sign-android-release@v1
-            with:
-              releaseDirectory: app/release
-              signingKeyBase64: ${{secrets.KEYSTORE_FILE}}
-              alias: ${{secrets.KEY_ALIAS}}
-              keyStorePassword: ${{secrets.STORE_PASSWORD}}
-              keyPassword: ${{secrets.KEY_PASSWORD}}
+        - name: Distribute app with 🔥 App Distribution 🚀
+          if: env.IS_MASTER == 'true'
+          uses: r0adkll/sign-android-release@v1
+          with:
+            releaseDirectory: app/release
+            signingKeyBase64: ${{secrets.KEYSTORE_FILE}}
+            alias: ${{secrets.KEY_ALIAS}}
+            keyStorePassword: ${{secrets.STORE_PASSWORD}}
+            keyPassword: ${{secrets.KEY_PASSWORD}}
 
-          - name: Run fastlane command for release
-            if: env.IS_MASTER == 'true'
-            run: bundle exec fastlane release
+        - name: Run fastlane command for release
+          if: env.IS_MASTER == 'true'
+          run: bundle exec fastlane release
 
-      BuildDebugApk:
-        name: Build For Staging
-        needs: job1
-        runs-on: ubuntu-latest
+    BuildDebugApk:
+      name: Build For Staging
+      needs: job1
+      runs-on: ubuntu-latest
 
-        if: ${{needs.job1.outputs.push == 'staging'}}
-        steps:
-          - uses: actions/checkout@v2
+      if: ${{needs.job1.outputs.push == 'staging'}}
+      steps:
+        - uses: actions/checkout@v2
 
-          - name: Create Debug apk file
-            if: env.IS_STAGING == 'true'
-            run: bundle exec fastlane staging
+        - name: Create Debug apk file
+          if: env.IS_STAGING == 'true'
+          run: bundle exec fastlane staging
 
 
 
