@@ -81,7 +81,7 @@ jobs:
           BRANCH_NAME1: ${{needs.job1.outputs.push}}
           IS_MASTER: ${{needs.job1.outputs.push  == 'master'}}
           IS_STAGING: ${{needs.job1.outputs.push  == 'staging'}}
-        run: echo "the branch name is $BRANCH_NAME1"
+        run: echo "the branch name is $BRANCH_NAME1 , $IS_MASTER"
 
 
       - name: Build
