@@ -77,44 +77,45 @@ jobs:
             bundle install --jobs 4 --retry 3
 
     BuildApk:
-      - name: Generate Build According to Branch
-        needs: setupGradleBuild
-        runs-on: ubuntu-latest
+      steps:
+        - name: Generate Build According to Branch
+          needs: setupGradleBuild
+          runs-on: ubuntu-latest
 
-      - name: Branch Name
-        shell: bash
-        env:
-          BRANCH_NAME1: ${{needs.job1.outputs.push}}
-          IS_MASTER: $BRANCH_NAME1  == 'master'
-          IS_STAGING: $BRANCH_NAME1  == 'staging'
-        run: echo "the branch name is $BRANCH_NAME1 , $IS_MASTER" >> $GITHUB_OUTPUT
+        - name: Branch Name
+          shell: bash
+          env:
+            BRANCH_NAME1: ${{needs.job1.outputs.push}}
+            IS_MASTER: $BRANCH_NAME1  == 'master'
+            IS_STAGING: $BRANCH_NAME1  == 'staging'
+          run: echo "the branch name is $BRANCH_NAME1 , $IS_MASTER" >> $GITHUB_OUTPUT
 
 
-      - name: Build
-        if: ${{env.IS_MASTER}}
-        run: ./gradlew build
-      - name: Assemble Release Bundle
-        if: env.IS_MASTER == 'true'
-        run: |
-          ./gradlew assembleRelease
+        - name: Build
+          if: ${{env.IS_MASTER}}
+          run: ./gradlew build
+        - name: Assemble Release Bundle
+          if: env.IS_MASTER == 'true'
+          run: |
+            ./gradlew assembleRelease
 
-      - name: Distribute app with 🔥 App Distribution 🚀
-        if: env.IS_MASTER == 'true'
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: app/release
-          signingKeyBase64: ${{secrets.KEYSTORE_FILE}}
-          alias: ${{secrets.KEY_ALIAS}}
-          keyStorePassword: ${{secrets.STORE_PASSWORD}}
-          keyPassword: ${{secrets.KEY_PASSWORD}}
+        - name: Distribute app with 🔥 App Distribution 🚀
+          if: env.IS_MASTER == 'true'
+          uses: r0adkll/sign-android-release@v1
+          with:
+            releaseDirectory: app/release
+            signingKeyBase64: ${{secrets.KEYSTORE_FILE}}
+            alias: ${{secrets.KEY_ALIAS}}
+            keyStorePassword: ${{secrets.STORE_PASSWORD}}
+            keyPassword: ${{secrets.KEY_PASSWORD}}
 
-      - name: Run fastlane command for release
-        if: env.IS_MASTER == 'true'
-        run: bundle exec fastlane release
+        - name: Run fastlane command for release
+          if: env.IS_MASTER == 'true'
+          run: bundle exec fastlane release
 
-      - name: Create Debug apk file
-        if: env.IS_STAGING == 'true'
-        run: bundle exec fastlane staging
+        - name: Create Debug apk file
+          if: env.IS_STAGING == 'true'
+          run: bundle exec fastlane staging
 
 
 
