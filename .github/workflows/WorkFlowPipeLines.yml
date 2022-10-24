@@ -67,10 +67,7 @@ jobs:
     - name: Grant Permission to Execute
       run: chmod +x gradlew
 
-    - name: Install bundle
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+
 
   BuildReleaseApk:
     name: Build For Release
@@ -80,6 +77,11 @@ jobs:
 #    if: ${{needs.job1.outputs.push == 'master'}}
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install bundle
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
 
       - name: Build
         run: ./gradlew build
@@ -108,6 +110,11 @@ jobs:
     if: "${{needs.job1.outputs.push == 'staging'}}"
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install bundle
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
 
       - name: Create Debug apk file
         run: bundle exec fastlane staging
