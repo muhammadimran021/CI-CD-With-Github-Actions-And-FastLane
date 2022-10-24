@@ -28,7 +28,7 @@ jobs:
 
       - name: Branch Name
         shell: bash
-        run: echo "the branch name is ${{ github.ref_name }} "
+        run: echo "the branch name is ${{ github.ref_name }}"
 
 
   setupGradleBuild:
@@ -67,12 +67,6 @@ jobs:
     - name: Grant Permission to Execute
       run: chmod +x gradlew
 
-    #       - name: Add firebase Plugin
-    #         run: fastlane add_plugin firebase_app_distribution
-
-    #       - name: Add firebase Plugin
-    #         run: fastlane add_plugin load_json
-
     - name: Install bundle
       run: |
         bundle config path vendor/bundle
@@ -83,27 +77,18 @@ jobs:
     needs: setupGradleBuild
     runs-on: ubuntu-latest
 
-    if: ${{needs.job1.outputs.push == 'master'}}
+    if: "${{needs.job1.outputs.push == 'master'}}"
     steps:
       - uses: actions/checkout@v2
 
-      - name: Branch Name
-        shell: bash
-        env:
-          BRANCH_NAME1: ${{needs.job1.outputs.push}}
-        run: echo "the branch name is $BRANCH_NAME1 "
-
-
       - name: Build
-        if: ${{env.IS_MASTER}}
         run: ./gradlew build
+
       - name: Assemble Release Bundle
-        if: env.IS_MASTER == 'true'
         run: |
           ./gradlew assembleRelease
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        if: env.IS_MASTER == 'true'
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/release
@@ -113,7 +98,6 @@ jobs:
           keyPassword: ${{secrets.KEY_PASSWORD}}
 
       - name: Run fastlane command for release
-        if: env.IS_MASTER == 'true'
         run: bundle exec fastlane release
 
   BuildDebugApk:
@@ -121,12 +105,11 @@ jobs:
     needs: setupGradleBuild
     runs-on: ubuntu-latest
 
-    if: ${{needs.job1.outputs.push == 'staging'}}
+    if: "${{needs.job1.outputs.push == 'staging'}}"
     steps:
       - uses: actions/checkout@v2
 
       - name: Create Debug apk file
-        if: env.IS_STAGING == 'true'
         run: bundle exec fastlane staging
 
 
