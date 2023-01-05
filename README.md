@@ -1,4 +1,4 @@
-# Fastlane Firebase App Distribution using Github Actions
+# Firebase App Distribution using Github Actions & Fastlane
 
 GitHub action pipelines with fastLane for app distribution 
 
