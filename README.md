@@ -1,6 +1,6 @@
 # Fastlane Firebase App Distribution CI/CD using Github Actions
 
-Hi all  I have implement GitHub action pipelines with fastLane for app distribution 
+GitHub action pipelines with fastLane for app distribution 
 
 GitHub action will trigger on every push or on pull request 
 
