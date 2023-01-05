@@ -36,7 +36,7 @@ platform :android do
 
     before_all do
     ENV["FIREBASE_LOGIN_CREDENTIALS"] = "fastlane/authententicationapp-5959f9dae913.json"
-    ENV["FIREBASE_APP_ID"] = "1:91922724469:android:feb45bb205a9f0f6892a3c"
+    ENV["FIREBASE_APP_ID"] = "1:91922724469:android:***45bb205a9f0f6892a3c"
     end
 
 
@@ -58,7 +58,7 @@ platform :android do
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
             apk_path: "app/release/app-release-signed.apk",
-            testers: "ik33218@gmail.com",
+            testers: "ik****@gmail.com",
             service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
             release_notes: "this is release build"
         )
@@ -70,7 +70,7 @@ platform :android do
           # build_android_app is a built-in fastlane action.
           firebase_app_distribution(
              app: ENV["FIREBASE_APP_ID"],
-             testers: "ik33218@gmail.com",
+             testers: "ik*****@gmail.com",
              service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
              release_notes: "this is debug build"
           )
