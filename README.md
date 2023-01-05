@@ -29,5 +29,5 @@ Or if the branch name is like Stage or Development it will create a debug apk
 <img width="576" alt="Screen Shot 2023-01-05 at 12 00 16 PM" src="https://user-images.githubusercontent.com/16763500/210720784-0928f363-4ff7-4c00-ac53-cc06b42568a6.png">
 
 NOTE: I create this actions according to my project need you can just modify it according to your project development lifecycle. 
-for more detail and deploy direct app on firebase without using fastlane you can read below article it will help alot
+for more detail and deploy direct app on firebase without using fastlane you can read below article it will help alot.
 https://www.kodeco.com/19407406-continuous-delivery-for-android-using-github-actions
